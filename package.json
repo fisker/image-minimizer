@@ -1,0 +1,88 @@
+{
+  "name": "image-minimizer",
+  "version": "0.0.7",
+  "description": "Image minimizer.",
+  "keywords": [
+    "Image",
+    "Minify",
+    "Minifier",
+    "Minimizer",
+    "squoosh",
+    "svgo"
+  ],
+  "homepage": "https://github.com/fisker/image-minimizer#readme",
+  "bugs": {
+    "url": "https://github.com/fisker/image-minimizer/issues"
+  },
+  "repository": "fisker/image-minimizer",
+  "funding": "https://github.com/fisker/image-minimizer?sponsor=1",
+  "license": "MIT",
+  "author": {
+    "name": "fisker Cheung",
+    "email": "lionkay@gmail.com",
+    "url": "https://www.fiskercheung.com/"
+  },
+  "sideEffects": false,
+  "type": "module",
+  "exports": "./index.js",
+  "files": [
+    "index.js",
+    "./utilities.js",
+    "package-json-proxy.cjs",
+    "cache.js",
+    "squoosh.js",
+    "svgo.js"
+  ],
+  "scripts": {
+    "clean": "run-p \"clean:*\"",
+    "clean:dist": "del-cli dist",
+    "dist": "run-p \"dist:*\"",
+    "dist:npm": "np --yolo --no-yarn",
+    "fix": "run-p \"fix:*\"",
+    "fix:eslint": "yarn lint:eslint --fix",
+    "fix:markdown": "markdownlint-cli2 --fix",
+    "fix:package-json": "sort-package-json \"package.json\" \"packages/*/package.json\"",
+    "fix:prettier": "yarn lint:prettier --write",
+    "lint": "run-p \"lint:*\"",
+    "lint:eslint": "eslint \"**/*.{js,jsx,mjs,cjs,vue}\"",
+    "lint:markdown": "markdownlint-cli2",
+    "lint:package-json": "yarn run fix:package-json --check",
+    "lint:prettier": "prettier . --check",
+    "prepare": "husky",
+    "test": "vitest",
+    "test-coverage": "vitest --coverage",
+    "release": "run-s lint test dist"
+  },
+  "dependencies": {
+    "@frostoven/libsquoosh": "^0.4.8",
+    "is-jpg": "3.0.0",
+    "is-png": "3.0.1",
+    "is-svg": "5.1.0",
+    "is-webp": "2.0.0",
+    "iterate-directory-up": "1.1.1",
+    "svgo": "^3.3.2",
+    "temp-dir": "3.0.0"
+  },
+  "devDependencies": {
+    "@fisker/eslint-config": "13.1.1",
+    "@fisker/lint-staged-config": "3.3.2",
+    "@fisker/markdownlint-cli2-config": "0.0.3",
+    "@fisker/prettier-config": "5.1.1",
+    "@vitest/coverage-v8": "2.0.5",
+    "del-cli": "5.1.0",
+    "eslint": "9.9.1",
+    "husky": "9.1.5",
+    "lint-staged": "15.2.9",
+    "markdownlint-cli2": "0.13.0",
+    "npm-run-all2": "6.2.2",
+    "prettier": "3.3.3",
+    "pretty-bytes": "6.1.1",
+    "sort-package-json": "2.10.1",
+    "vitest": "2.0.5"
+  },
+  "packageManager": "yarn@4.4.1",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

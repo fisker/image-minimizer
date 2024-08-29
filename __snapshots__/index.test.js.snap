@@ -1,0 +1,78 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Main 1`] = `
+[
+  {
+    "compressed": "12.9 kB (12907)",
+    "name": "car-lite.svg",
+    "original": "26.5 kB (26539)",
+    "saved": {
+      "percentage": "-51.37%",
+      "size": "-13.6 kB (-13632)",
+    },
+  },
+  {
+    "compressed": "390 kB (390312)",
+    "name": "demo-artwork.jpg",
+    "original": "2.92 MB (2922539)",
+    "saved": {
+      "percentage": "-86.64%",
+      "size": "-2.53 MB (-2532227)",
+    },
+  },
+  {
+    "compressed": "1.42 MB (1421280)",
+    "name": "demo-device-screen.png",
+    "original": "1.62 MB (1622142)",
+    "saved": {
+      "percentage": "-12.38%",
+      "size": "-201 kB (-200862)",
+    },
+  },
+  {
+    "compressed": "862 kB (862478)",
+    "name": "demo-large-photo.jpg",
+    "original": "2.79 MB (2790013)",
+    "saved": {
+      "percentage": "-69.09%",
+      "size": "-1.93 MB (-1927535)",
+    },
+  },
+  {
+    "compressed": "895 B (895)",
+    "name": "index.html",
+    "original": "895 B (895)",
+    "saved": {
+      "percentage": "0.00%",
+      "size": "0 B (0)",
+    },
+  },
+  {
+    "compressed": "25.4 kB (25409)",
+    "name": "sofa_grid1x5_420.avif",
+    "original": "25.4 kB (25409)",
+    "saved": {
+      "percentage": "0.00%",
+      "size": "0 B (0)",
+    },
+  },
+  {
+    "compressed": "151 B (151)",
+    "name": "test.jxl",
+    "original": "151 B (151)",
+    "saved": {
+      "percentage": "0.00%",
+      "size": "0 B (0)",
+    },
+  },
+  {
+    "compressed": "2.05 kB (2050)",
+    "name": "test.webp",
+    "original": "4.88 kB (4880)",
+    "saved": {
+      "percentage": "-57.99%",
+      "size": "-2.83 kB (-2830)",
+    },
+  },
+]
+`;
