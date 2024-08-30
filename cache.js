@@ -58,7 +58,7 @@ class Cache {
       !Array.isArray(data.files)
     ) {
       try {
-        fs.rmdirSync(this.#cacheDirectory, {recursive: true})
+        fs.rm(this.#cacheDirectory, {recursive: true})
       } catch {}
       return
     }
