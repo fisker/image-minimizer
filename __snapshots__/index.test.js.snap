@@ -39,15 +39,6 @@ exports[`Main 1`] = `
     },
   },
   {
-    "compressed": "895 B (895)",
-    "name": "index.html",
-    "original": "895 B (895)",
-    "saved": {
-      "percentage": "0.00%",
-      "size": "0 B (0)",
-    },
-  },
-  {
     "compressed": "25.4 kB (25409)",
     "name": "sofa_grid1x5_420.avif",
     "original": "25.4 kB (25409)",

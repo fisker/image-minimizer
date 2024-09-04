@@ -1,4 +1,4 @@
-import url from 'node:url'
+import {Buffer} from 'node:buffer'
 import fs from 'node:fs/promises'
 import {expect, test} from 'vitest'
 import prettyBytes from 'pretty-bytes'
@@ -26,6 +26,10 @@ async function run() {
   files.sort((fileA, fileB) => fileA.name.localeCompare(fileB.name))
 
   const compressed = await minifyImages(files)
+
+  if (compressed.some((data) => !(data instanceof Buffer))) {
+    throw new Error("Should always return 'Buffer'")
+  }
 
   const result = await Promise.all(
     files.map((file, index) => {

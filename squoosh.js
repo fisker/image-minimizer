@@ -3,6 +3,7 @@ import * as path from 'node:path'
 import url from 'node:url'
 import os from 'node:os'
 import fs from 'node:fs/promises'
+import {Buffer} from 'node:buffer'
 import isJpeg from 'is-jpg'
 import isWebp from 'is-webp'
 import isPng from 'is-png'
@@ -93,7 +94,7 @@ async function squooshImages(files, {cache, onFileExtensionError}) {
         const compressed = result.binary
         const data = compressed.length < original.length ? compressed : original
 
-        return data
+        return Buffer.from(data)
       }),
     )
   } finally {
