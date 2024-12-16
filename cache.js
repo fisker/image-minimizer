@@ -7,6 +7,7 @@ import temporaryDirectory from 'temp-dir'
 import iterateDirectoryUp from 'iterate-directory-up'
 
 function hash(data) {
+  // eslint-disable-next-line sonarjs/hashing
   return crypto.createHash('sha1').update(data).digest('hex')
 }
 
