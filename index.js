@@ -10,12 +10,6 @@ const getFileExtensionErrorMessage = (image) =>
 
 const onFileExtensionErrorHandlers = new Map([
   [
-    'warn',
-    (image) => {
-      console.warn(getFileExtensionErrorMessage(image))
-    },
-  ],
-  [
     'error',
     (image) => {
       throw Object.assign(new Error(getFileExtensionErrorMessage(image)), {
@@ -23,6 +17,13 @@ const onFileExtensionErrorHandlers = new Map([
       })
     },
   ],
+  [
+    'warn',
+    (image) => {
+      console.warn(getFileExtensionErrorMessage(image))
+    },
+  ],
+  ['ignore', () => {}],
 ])
 
 class ImageMinimizer {

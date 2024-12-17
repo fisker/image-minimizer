@@ -6,15 +6,31 @@ import packageJson from './package-json-proxy.cjs'
 import temporaryDirectory from 'temp-dir'
 import iterateDirectoryUp from 'iterate-directory-up'
 
-function hash({content, name}) {
+function hashFile({content, name}) {
   // eslint-disable-next-line sonarjs/hashing
   return crypto.createHash('sha1').update(name).update(content).digest('hex')
 }
 
+function hashString(content) {
+  // eslint-disable-next-line sonarjs/hashing
+  return crypto.createHash('sha1').update(content).digest('hex')
+}
+
 function getCacheDirectory(root) {
+  const directoryName = hashString(
+    JSON.stringify({
+      name: packageJson.name,
+      version: packageJson.version,
+      root,
+    }),
+  )
+
   for (const directory of iterateDirectoryUp(root)) {
     if (fs.existsSync(path.join(directory, 'node_modules'))) {
-      return path.join(directory, `node_modules/.cache/${packageJson.name}/`)
+      return path.join(
+        directory,
+        `node_modules/.cache/${packageJson.name}/${directoryName}`,
+      )
     }
 
     if (fs.existsSync(path.join(directory, '.git'))) {
@@ -22,7 +38,7 @@ function getCacheDirectory(root) {
     }
   }
 
-  return path.join(temporaryDirectory, `${packageJson.name}/${hash(root)}/`)
+  return path.join(temporaryDirectory, `${packageJson.name}/${directoryName}/`)
 }
 
 class Cache {
@@ -72,7 +88,7 @@ class Cache {
       return
     }
 
-    const fileHash = hash(file)
+    const fileHash = hashFile(file)
 
     if (this.#updated.has(fileHash)) {
       return this.#updated.get(fileHash)
@@ -97,7 +113,7 @@ class Cache {
   }
 
   updateCache(file, data) {
-    const fileHash = hash(file)
+    const fileHash = hashFile(file)
     this.#updated.set(fileHash, data)
   }
 

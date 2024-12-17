@@ -60,7 +60,7 @@ Enables cache.
 
 #### `options.onFileExtensionError`
 
-Type: `'error' | 'warn' | (file) => void`\
+Type: `'error' | 'warn' | 'ignore' | (file) => void`\
 Default: `'error'`
 
 Executes when file extension doesn't match actual file type.

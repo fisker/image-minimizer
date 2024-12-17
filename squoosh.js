@@ -69,20 +69,24 @@ async function squooshImages(files, {cache, onFileExtensionError}) {
 
   try {
     result = await Promise.all(
-      files.map(async ({content: original, name, _image}) => {
-        const encoder = getEncoder(name)
+      files.map(async (file) => {
+        const encoder = file.path
+          ? getEncoder(file.path)
+          : getEncoder(file.name)
         if (!encoder) {
-          return original
+          return file.content
         }
 
-        const cached = cache.getCachedData(original)
+        const cached = cache.getCachedData(file)
 
         if (cached) {
           return cached
         }
 
+        const original = file.content
+
         if (onFileExtensionError && !encoder.test(original)) {
-          onFileExtensionError(_image)
+          onFileExtensionError(file)
         }
 
         const imagePool = await getImagePool()
