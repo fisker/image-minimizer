@@ -76,10 +76,9 @@ class ImageMinimizer {
     })
 
     for (const [index, image] of images.entries()) {
-      const original = image.content
       const compressed = compressedImages[index]
 
-      this.#cache.updateCache(original, compressed)
+      this.#cache.updateCache(image, compressed)
       result.set(image, compressed)
     }
   }
@@ -90,7 +89,7 @@ class ImageMinimizer {
     for (const image of images) {
       const original = image.content
 
-      let compressed = this.#cache.getCachedData(original)
+      let compressed = this.#cache.getCachedData(image)
       if (!compressed) {
         if (this.#onFileExtensionError && !isSvg(String(original))) {
           this.#onFileExtensionError(image)
@@ -99,7 +98,7 @@ class ImageMinimizer {
         compressed = optimizeSvg(original, {multipass: true})
       }
 
-      this.#cache.updateCache(original, compressed)
+      this.#cache.updateCache(image, compressed)
       result.set(image, compressed)
     }
   }

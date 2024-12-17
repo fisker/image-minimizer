@@ -6,9 +6,9 @@ import packageJson from './package-json-proxy.cjs'
 import temporaryDirectory from 'temp-dir'
 import iterateDirectoryUp from 'iterate-directory-up'
 
-function hash(data) {
+function hash({content, name}) {
   // eslint-disable-next-line sonarjs/hashing
-  return crypto.createHash('sha1').update(data).digest('hex')
+  return crypto.createHash('sha1').update(name).update(content).digest('hex')
 }
 
 function getCacheDirectory(root) {
@@ -67,45 +67,45 @@ class Cache {
     return new Set(data.files)
   }
 
-  getCachedData(content) {
+  getCachedData(file) {
     if (this.#files.size === 0 && this.#updated.size === 0) {
       return
     }
 
-    const contentHash = hash(content)
+    const fileHash = hash(file)
 
-    if (this.#updated.has(contentHash)) {
-      return this.#updated.get(contentHash)
+    if (this.#updated.has(fileHash)) {
+      return this.#updated.get(fileHash)
     }
 
-    if (!this.#files.has(contentHash)) {
+    if (!this.#files.has(fileHash)) {
       return
     }
 
     let data
     try {
-      data = fs.readFileSync(path.join(this.#cacheDirectory, contentHash))
+      data = fs.readFileSync(path.join(this.#cacheDirectory, fileHash))
     } catch {}
 
     if (!data) {
       return
     }
 
-    this.#updated.set(contentHash, data)
+    this.#updated.set(fileHash, data)
 
     return data
   }
 
-  updateCache(content, data) {
-    const contentHash = hash(content)
-    this.#updated.set(contentHash, data)
+  updateCache(file, data) {
+    const fileHash = hash(file)
+    this.#updated.set(fileHash, data)
   }
 
   writeFile() {
     fs.mkdirSync(this.#cacheDirectory, {recursive: true})
 
-    for (const [contentHash, data] of this.#updated) {
-      fs.writeFileSync(path.join(this.#cacheDirectory, contentHash), data)
+    for (const [fileHash, data] of this.#updated) {
+      fs.writeFileSync(path.join(this.#cacheDirectory, fileHash), data)
     }
 
     fs.writeFileSync(
