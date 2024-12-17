@@ -32,6 +32,7 @@ class ImageMinimizer {
 
   constructor(options) {
     let onFileExtensionError = options?.onFileExtensionError
+    const shouldEnableCache = options?.cache !== false
 
     if (
       typeof onFileExtensionError === 'string' &&
@@ -42,7 +43,13 @@ class ImageMinimizer {
     }
 
     this.#onFileExtensionError = onFileExtensionError
-    this.#cache = new Cache()
+    this.#cache = shouldEnableCache
+      ? new Cache()
+      : {
+          getCachedData() {},
+          updateCache() {},
+          writeFile() {},
+        }
   }
 
   async process(images) {
@@ -98,10 +105,10 @@ class ImageMinimizer {
   }
 }
 
-async function minifyImages(imageOrImages) {
+async function minifyImages(imageOrImages, options) {
   const isArray = Array.isArray(imageOrImages)
 
-  const imageMinimizer = new ImageMinimizer()
+  const imageMinimizer = new ImageMinimizer(options)
   const compressed = await imageMinimizer.process(
     isArray ? imageOrImages : [imageOrImages],
   )

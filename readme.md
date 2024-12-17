@@ -24,8 +24,6 @@ yarn add image-minimizer --dev
 
 ## Usage
 
-Add `image-minimizer` to your Vite config file.
-
 ```js
 import fs from 'node:fs/promises'
 import path from 'node:path'
@@ -45,4 +43,24 @@ files = await Promise.all(
 )
 
 const compressed = await minifyImages(files)
+console.log(compressed)
+// -> [<Buffer ...>, ...]
 ```
+
+### API
+
+#### `minifyImages(fileOrFiles, options?)`
+
+##### `options.cache`
+
+Type: `boolean`\
+Default: `true`
+
+Enables cache.
+
+#### `options.onFileExtensionError`
+
+Type: `'error' | 'warn' | (file) => void`\
+Default: `'error'`
+
+Executes when file extension doesn't match actual file type.
