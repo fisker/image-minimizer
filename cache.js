@@ -17,19 +17,13 @@ function hashString(content) {
 }
 
 function getCacheDirectory(root) {
-  const directoryName = hashString(
-    JSON.stringify({
-      name: packageJson.name,
-      version: packageJson.version,
-      root,
-    }),
-  )
+  const directoryName = hashString(root)
 
   for (const directory of iterateDirectoryUp(root)) {
     if (fs.existsSync(path.join(directory, 'node_modules'))) {
       return path.join(
         directory,
-        `node_modules/.cache/${packageJson.name}/${directoryName}`,
+        `node_modules/.cache/${packageJson.name}/${directoryName}/`,
       )
     }
 
