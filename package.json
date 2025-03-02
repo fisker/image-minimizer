@@ -77,7 +77,7 @@
     "npm-run-all2": "7.0.1",
     "prettier": "3.5.2",
     "pretty-bytes": "6.1.1",
-    "sort-package-json": "2.15.0",
+    "sort-package-json": "2.15.1",
     "vitest": "3.0.7"
   },
   "packageManager": "yarn@4.5.3",
